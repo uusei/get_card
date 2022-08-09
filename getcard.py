@@ -47,8 +47,8 @@ class Ui_getcard(object):
         self.horizontalLayout_3.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.radioButton = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton.setMinimumSize(QtCore.QSize(100, 30))
-        self.radioButton.setMaximumSize(QtCore.QSize(120, 30))
+        self.radioButton.setMinimumSize(QtCore.QSize(110, 30))
+        self.radioButton.setMaximumSize(QtCore.QSize(130, 30))
         font = QtGui.QFont()
         font.setFamily("思源宋体 Heavy")
         font.setPointSize(10)
@@ -60,10 +60,11 @@ class Ui_getcard(object):
 "color:#ff9292;\n"
 "background-color: #ffffff;\n"
 "border: 2px solid #ff9292;\n"
-"border-radius: 15px;")
+"border-radius: 10px;")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("musical-notes.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.radioButton.setIcon(icon1)
+        self.radioButton.setIconSize(QtCore.QSize(25, 25))
         self.radioButton.setChecked(True)
         self.radioButton.setObjectName("radioButton")
         self.horizontalLayout_3.addWidget(self.radioButton)
@@ -146,13 +147,15 @@ class Ui_getcard(object):
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem3)
-        self.videowidget = QVideoWidget(self.centralwidget)
-        self.videowidget.setMinimumSize(QtCore.QSize(650, 400))
-        self.videowidget.setStyleSheet("border: 3px solid rgb(229, 229, 229);\n"
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setMinimumSize(QtCore.QSize(650, 400))
+        self.label_3.setMaximumSize(QtCore.QSize(1280, 720))
+        self.label_3.setStyleSheet("border: 3px solid rgb(229, 229, 229);\n"
 "border-radius: 8px;\n"
 "border-image: none;")
-        self.videowidget.setObjectName("videowidget")
-        self.horizontalLayout_2.addWidget(self.videowidget)
+        self.label_3.setText("")
+        self.label_3.setObjectName("label_3")
+        self.horizontalLayout_2.addWidget(self.label_3)
         spacerItem4 = QtWidgets.QSpacerItem(80, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem4)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
@@ -272,5 +275,4 @@ class Ui_getcard(object):
         self.pushButton_3.setText(_translate("getcard", "查看调试台"))
         self.pushButton_5.setText(_translate("getcard", "清空抽卡记录"))
         self.pushButton_2.setText(_translate("getcard", "消耗×1抽取"))
-from PyQt5.QtMultimediaWidgets import QVideoWidget
 import card
