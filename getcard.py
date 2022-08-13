@@ -29,8 +29,7 @@ class Ui_getcard(object):
         getcard.setWindowIcon(icon)
         getcard.setWindowOpacity(1.0)
         getcard.setStyleSheet("border-image: url(:/image/master1200.jpg); \n"
-"border-radius: 8px;\n"
-"background: transparent")
+"border-radius: 8px;")
         getcard.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         getcard.setAnimated(True)
         getcard.setTabShape(QtWidgets.QTabWidget.Rounded)
@@ -50,7 +49,7 @@ class Ui_getcard(object):
         self.radioButton.setMinimumSize(QtCore.QSize(110, 30))
         self.radioButton.setMaximumSize(QtCore.QSize(130, 30))
         font = QtGui.QFont()
-        font.setFamily("思源宋体 Heavy")
+        font.setFamily("字魂蜜桃猫体")
         font.setPointSize(10)
         font.setBold(False)
         font.setWeight(50)
@@ -85,11 +84,11 @@ class Ui_getcard(object):
         font.setFamily("字魂蜜桃猫体")
         font.setPointSize(10)
         self.label_2.setFont(font)
-        self.label_2.setStyleSheet("background-color: rgb(197, 197, 197);\n"
-"border: 3px solid rgb(229, 229, 229);\n"
+        self.label_2.setStyleSheet("background-color: #ffffff;\n"
+"border: 3px solid #ff9292;\n"
 "border-radius: 15px;\n"
 "padding: 5px 5px;\n"
-"color: rgb(255, 253, 225);\n"
+"color: #ff9292;\n"
 "border-image: none;")
         self.label_2.setScaledContents(False)
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
@@ -101,6 +100,9 @@ class Ui_getcard(object):
         self.pushButton_back = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_back.setMinimumSize(QtCore.QSize(30, 30))
         self.pushButton_back.setMaximumSize(QtCore.QSize(30, 30))
+        font = QtGui.QFont()
+        font.setFamily("字魂蜜桃猫体")
+        self.pushButton_back.setFont(font)
         self.pushButton_back.setStyleSheet("QPushButton {\n"
 "border-image: none;\n"
 "    color:#e799b0;\n"
@@ -120,7 +122,7 @@ class Ui_getcard(object):
         self.pushButton.setMinimumSize(QtCore.QSize(30, 30))
         self.pushButton.setMaximumSize(QtCore.QSize(30, 30))
         font = QtGui.QFont()
-        font.setFamily("思源宋体 Heavy")
+        font.setFamily("字魂蜜桃猫体")
         font.setBold(True)
         font.setWeight(75)
         self.pushButton.setFont(font)
@@ -145,18 +147,18 @@ class Ui_getcard(object):
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem3)
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setMinimumSize(QtCore.QSize(650, 400))
+        self.label_3.setMinimumSize(QtCore.QSize(720, 400))
         self.label_3.setMaximumSize(QtCore.QSize(1280, 720))
-        self.label_3.setStyleSheet("border: 3px solid rgb(229, 229, 229);\n"
+        self.label_3.setStyleSheet("border: 3px solid #ff9292;\n"
 "border-radius: 8px;\n"
 "border-image: none;")
         self.label_3.setText("")
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_2.addWidget(self.label_3)
-        spacerItem4 = QtWidgets.QSpacerItem(80, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        spacerItem4 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem4)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -168,7 +170,7 @@ class Ui_getcard(object):
         self.pushButton_4.setMinimumSize(QtCore.QSize(110, 30))
         self.pushButton_4.setMaximumSize(QtCore.QSize(110, 40))
         font = QtGui.QFont()
-        font.setFamily("思源宋体 Heavy")
+        font.setFamily("字魂蜜桃猫体")
         font.setPointSize(10)
         font.setBold(False)
         font.setWeight(50)
@@ -190,7 +192,7 @@ class Ui_getcard(object):
         self.pushButton_3.setMinimumSize(QtCore.QSize(110, 30))
         self.pushButton_3.setMaximumSize(QtCore.QSize(110, 40))
         font = QtGui.QFont()
-        font.setFamily("思源宋体 Heavy")
+        font.setFamily("字魂蜜桃猫体")
         font.setPointSize(10)
         font.setBold(False)
         font.setWeight(50)
@@ -212,7 +214,7 @@ class Ui_getcard(object):
         self.pushButton_5.setMinimumSize(QtCore.QSize(110, 30))
         self.pushButton_5.setMaximumSize(QtCore.QSize(110, 40))
         font = QtGui.QFont()
-        font.setFamily("思源宋体 Heavy")
+        font.setFamily("字魂蜜桃猫体")
         font.setPointSize(10)
         font.setBold(False)
         font.setWeight(50)
@@ -236,7 +238,7 @@ class Ui_getcard(object):
         self.pushButton_2.setMinimumSize(QtCore.QSize(110, 30))
         self.pushButton_2.setMaximumSize(QtCore.QSize(110, 40))
         font = QtGui.QFont()
-        font.setFamily("思源宋体 Heavy")
+        font.setFamily("字魂蜜桃猫体")
         font.setPointSize(10)
         font.setBold(False)
         font.setWeight(50)
@@ -273,6 +275,6 @@ class Ui_getcard(object):
         self.pushButton.setText(_translate("getcard", "×"))
         self.pushButton_4.setText(_translate("getcard", "操作说明"))
         self.pushButton_3.setText(_translate("getcard", "查看调试台"))
-        self.pushButton_5.setText(_translate("getcard", "清空抽卡记录"))
+        self.pushButton_5.setText(_translate("getcard", "更新玛娜"))
         self.pushButton_2.setText(_translate("getcard", "消耗×1抽取"))
 import card
