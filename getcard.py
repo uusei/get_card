@@ -28,7 +28,7 @@ class Ui_getcard(object):
         icon.addPixmap(QtGui.QPixmap(":/image/155.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         getcard.setWindowIcon(icon)
         getcard.setWindowOpacity(1.0)
-        getcard.setStyleSheet("border-image: url(:/image/master1200.jpg); \n"
+        getcard.setStyleSheet("border-image: url(:/image/master1200.png);\n"
 "border-radius: 8px;")
         getcard.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         getcard.setAnimated(True)
@@ -50,7 +50,7 @@ class Ui_getcard(object):
         self.radioButton.setMaximumSize(QtCore.QSize(130, 30))
         font = QtGui.QFont()
         font.setFamily("字魂蜜桃猫体")
-        font.setPointSize(10)
+        font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.radioButton.setFont(font)
@@ -82,7 +82,7 @@ class Ui_getcard(object):
         self.label_2.setMaximumSize(QtCore.QSize(120, 30))
         font = QtGui.QFont()
         font.setFamily("字魂蜜桃猫体")
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.label_2.setFont(font)
         self.label_2.setStyleSheet("background-color: #ffffff;\n"
 "border: 3px solid #ff9292;\n"
@@ -149,15 +149,14 @@ class Ui_getcard(object):
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         spacerItem3 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem3)
-        self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setMinimumSize(QtCore.QSize(720, 400))
-        self.label_3.setMaximumSize(QtCore.QSize(1280, 720))
-        self.label_3.setStyleSheet("border: 3px solid #ff9292;\n"
+        self.widget = QVideoWidget(self.centralwidget)
+        self.widget.setMinimumSize(QtCore.QSize(719, 400))
+        self.widget.setMaximumSize(QtCore.QSize(1706, 960))
+        self.widget.setStyleSheet("border: 3px solid #ff9292;\n"
 "border-radius: 8px;\n"
 "border-image: none;")
-        self.label_3.setText("")
-        self.label_3.setObjectName("label_3")
-        self.horizontalLayout_2.addWidget(self.label_3)
+        self.widget.setObjectName("widget")
+        self.horizontalLayout_2.addWidget(self.widget)
         spacerItem4 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem4)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
@@ -171,7 +170,7 @@ class Ui_getcard(object):
         self.pushButton_4.setMaximumSize(QtCore.QSize(110, 40))
         font = QtGui.QFont()
         font.setFamily("字魂蜜桃猫体")
-        font.setPointSize(10)
+        font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.pushButton_4.setFont(font)
@@ -193,7 +192,7 @@ class Ui_getcard(object):
         self.pushButton_3.setMaximumSize(QtCore.QSize(110, 40))
         font = QtGui.QFont()
         font.setFamily("字魂蜜桃猫体")
-        font.setPointSize(10)
+        font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.pushButton_3.setFont(font)
@@ -215,7 +214,7 @@ class Ui_getcard(object):
         self.pushButton_5.setMaximumSize(QtCore.QSize(110, 40))
         font = QtGui.QFont()
         font.setFamily("字魂蜜桃猫体")
-        font.setPointSize(10)
+        font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.pushButton_5.setFont(font)
@@ -239,7 +238,7 @@ class Ui_getcard(object):
         self.pushButton_2.setMaximumSize(QtCore.QSize(110, 40))
         font = QtGui.QFont()
         font.setFamily("字魂蜜桃猫体")
-        font.setPointSize(10)
+        font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.pushButton_2.setFont(font)
@@ -277,4 +276,5 @@ class Ui_getcard(object):
         self.pushButton_3.setText(_translate("getcard", "查看调试台"))
         self.pushButton_5.setText(_translate("getcard", "更新玛娜"))
         self.pushButton_2.setText(_translate("getcard", "消耗×1抽取"))
+from PyQt5.QtMultimediaWidgets import QVideoWidget
 import card

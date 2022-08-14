@@ -4,13 +4,13 @@ from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtCore import *
 import sys
 from getcard import Ui_getcard
-from PyQt5 import QtMultimedia
+from PyQt5.QtMultimedia import *
 from PyQt5.QtMultimediaWidgets import QVideoWidget
 import time
-from ffpyplayer.player import MediaPlayer
 import numpy_operator as npor
 import numpy as np
 import card_show
+from PyQt5.QtGui import QCursor
 
 class card_func(QMainWindow, Ui_getcard):
 
@@ -18,13 +18,6 @@ class card_func(QMainWindow, Ui_getcard):
         super().__init__()
         self.setupUi(self)
         self.init_ui()
-        self.videoinit()
-        # if (size.width() < screen.width()) & (size.height() < screen.height()) & \
-                #(size.width() <= 1920) & (size.height() <= 1080):
-           # self.resize(screen.width(), screen.height())
-        #elif (size.width() < screen.width()) & (size.height() < screen.height()) & \
-         #       (size.width() > 1920) & (size.height() > 1080):
-         #   self.resize(1920, 1080)
         self.musicon = self.radioButton.isChecked()
         self.Update1 = Update()
         self.Update1.start()
@@ -34,45 +27,56 @@ class card_func(QMainWindow, Ui_getcard):
         self.pushButton_2.clicked.connect(self.gachicard)
         self.pushButton_5.clicked.connect(self.update_card)
 
+    def default_size(self):
+        screen = QDesktopWidget().screenGeometry()
+        size = self.geometry()
+        if (size.width() < screen.width()) & (size.height() < screen.height()) & \
+                (size.width() <= 1920) & (size.height() <= 1080):
+            self.setGeometry(0, 0, screen.width(), screen.height())
+        elif (size.width() < screen.width()) & (size.height() < screen.height()) & \
+                (size.width() > 1920) & (size.height() > 1080):
+            self.setGeometry(0, 0, 1920, 1080)
 
     def videoinit(self):
-        # 实例化图片
-        self.image1 = QtGui.QImage()
-        self.finishing = ''
-        # 设定视频
-        ff_opt = {'loop': 0}
-        self.vplayer = MediaPlayer('02.mp4', ff_opts=ff_opt)
-        # 时间轴
-        self.timer = QTimer()
-        self.timer.setInterval(30)
-        self.timer.start()
-        self.timer.timeout.connect(self.videoplay)
+        self.player2 = QMediaPlayer()
+        self.playlist1 = QMediaPlaylist()
+        self.mp4_file = QMediaContent(QUrl.fromLocalFile('02.mp4'))
+        self.playlist1.addMedia(self.mp4_file)  # 选取视频文件
+        # self.playlist1.setCurrentIndex(1)
+        self.playlist1.setPlaybackMode(QMediaPlaylist.CurrentItemInLoop)
+        self.player2.setPlaylist(self.playlist1)
+        self.player2.setVideoOutput(self.widget)
+        # print(self.mp4_file)
+        self.videoplay()
 
     def init_ui(self):
         self.setWindowFlags(Qt.FramelessWindowHint)
         # screen = QDesktopWidget().screenGeometry()
         # size = self.geometry()
+        self.default_size()
         self.pushButton.clicked.connect(self.close)
         self.pushButton_back.clicked.connect(self.showMinimized)
         self.musicinit()
         self.musicinit_re()
+
+        self.videoinit()
         self.readtime = 0
-        self.setAttribute(Qt.WA_TranslucentBackground)
+        # self.setAttribute(Qt.WA_TranslucentBackground)
         self.update_card()
 
     def musicinit(self):
         self.play1 = False
         self.firstplay = True
         wavefile = QUrl.fromLocalFile('Grand.wav')
-        content = QtMultimedia.QMediaContent(wavefile)
-        self.player = QtMultimedia.QMediaPlayer()
+        content = QMediaContent(wavefile)
+        self.player = QMediaPlayer()
         self.player.setMedia(content)
         self.player.setVolume(60)
 
     def musicinit_re(self):
         rewave = QUrl.fromLocalFile('Grand_01.wav')
-        recontent = QtMultimedia.QMediaContent(rewave)
-        self.player1 = QtMultimedia.QMediaPlayer()
+        recontent = QMediaContent(rewave)
+        self.player1 = QMediaPlayer()
         self.player1.setMedia(recontent)
         self.player1.setVolume(60)
 
@@ -105,14 +109,8 @@ class card_func(QMainWindow, Ui_getcard):
             self.firstplay = False
 
     def videoplay(self):
-        # print('videoplay')
-        frame, self.finishing = self.vplayer.get_frame()
-        if frame is not None:
-            img, t = frame
-            self.image1 = QtGui.QImage(bytes(img.to_bytearray()[0]), img.get_size()[0], img.get_size()[1],
-                               QtGui.QImage.Format_RGB888)
-            self.image1 = self.image1.scaled(self.label_3.width(), self.label_3.height())
-            self.label_3.setPixmap(QtGui.QPixmap.fromImage(self.image1))
+        self.widget.show()
+        self.player2.play()
 
     def lack_mana(self):
         self.reply = QMessageBox(QMessageBox.Information, "提示", "\t    -玛娜不足-\n请重置抽卡次数或者更换卡池文件内容")
@@ -153,8 +151,7 @@ class card_func(QMainWindow, Ui_getcard):
             self.lack_mana()
         # 进行抽选
         else:
-            self.timer.stop()
-            self.vplayer.set_pause(True)
+            self.player2.stop()
             self.radioButton.setChecked(False)
             # 得到抽到的目录 得到图片数组位置
             self.picdir, self.initpic = npor.gachi_card_out(self.pic, self.count_pic)
@@ -169,9 +166,8 @@ class card_func(QMainWindow, Ui_getcard):
         self.label_2.setText(str(self.count_pic))
         np.save('picnum1', self.pic)
         print(self.pic)
-        self.timer.start()
         self.radioButton.setChecked(True)
-        self.vplayer.set_pause(False)
+        self.player2.play()
 
     def update_card(self):
         self.Dialogue = card_show.card_show()
@@ -179,6 +175,23 @@ class card_func(QMainWindow, Ui_getcard):
         self.pic, self.count_pic = npor.read_num()
         self.label_2.setText(str(self.count_pic))
         self.Dialogue.closed.connect(self.save_num)
+
+    def mousePressEvent(self, e):
+        self.__dragWin = True
+        self.__dragWin_x = e.x()
+        self.__dragWin_y = e.y()
+        self.setCursor(QCursor(Qt.OpenHandCursor))  # 更改鼠标图标
+
+    def mouseMoveEvent(self, e):
+        # 移动gif题
+        if self.__dragWin == True:
+            pos = e.globalPos()
+            self.move(pos.x() - self.__dragWin_x, pos.y() - self.__dragWin_y)
+
+    def mouseReleaseEvent(self, e):
+        self.__dragWin = False
+        self.setCursor(QCursor(Qt.ArrowCursor))
+
 
 class Update(QThread):
     date1 = pyqtSignal()
@@ -190,7 +203,6 @@ class Update(QThread):
         while True:
             time.sleep(0.1)
             self.date1.emit()  # 发射信号
-
 
 
 if __name__ == '__main__':

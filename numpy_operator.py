@@ -2,7 +2,6 @@
 import os
 import numpy as np
 import random as ra
-import sys
 
 def read_num():
     picpath, save_video = init_file()
