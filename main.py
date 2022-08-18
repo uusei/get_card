@@ -10,6 +10,7 @@ import time
 import numpy_operator as npor
 import numpy as np
 import card_show
+from showrecord import record_window
 from PyQt5.QtGui import QCursor
 import cv2
 
@@ -31,6 +32,7 @@ class card_func(QMainWindow, Ui_getcard):
         self.pushButton_2.clicked.connect(self.gachicard)
         self.pushButton_5.clicked.connect(self.update_card)
         self.Update_s.date2.connect(self.video_size)
+        self.pushButton_3.clicked.connect(self.recordit)
 
     def default_size(self):
         screen = QDesktopWidget().screenGeometry()
@@ -119,14 +121,12 @@ class card_func(QMainWindow, Ui_getcard):
     def videoplay(self, image):
         self.screenfull.setPixmap(QtGui.QPixmap(image))
 
-
     def lack_mana(self):
         self.reply = QMessageBox(QMessageBox.Information, "提示", "\t    -玛娜不足-\n请重置抽卡次数或者更换卡池文件内容")
         # 添加自定义按钮
         self.reply.addButton('知道了', QMessageBox.YesRole)
         self.reply.addButton('也不是不可以啦', QMessageBox.NoRole)
         self.reply.setWindowFlags(Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Tool)
-
         self.reply.setStyleSheet("  QPushButton {"
                                  "  padding: 5px 5px;"
                                  "  color:#ffffff;"
@@ -173,6 +173,7 @@ class card_func(QMainWindow, Ui_getcard):
         self.pic = np.delete(self.pic, self.initpic)
         self.count_pic -= 1
         self.label_2.setText(str(self.count_pic))
+
         np.save('picnum1', self.pic)
         print(self.pic)
         self.radioButton.setChecked(True)
@@ -187,6 +188,11 @@ class card_func(QMainWindow, Ui_getcard):
         self.pic, self.count_pic = npor.read_num()
         self.label_2.setText(str(self.count_pic))
         self.Dialogue.closed.connect(self.save_num)
+
+    def recordit(self):
+        self.record_Widget = record_window()
+        self.record_Widget.show()
+        self.record_Widget.print_record()
 
     def mousePressEvent(self, e):
         global video_status

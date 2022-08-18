@@ -8,6 +8,7 @@ from PyQt5.QtMultimedia import *
 import numpy_operator as npor
 import cv2
 
+
 class card_show(QWidget, Ui_Form):
     card_fin = pyqtSignal()
     closed = pyqtSignal()
