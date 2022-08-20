@@ -96,6 +96,7 @@ class record_window(QWidget):
         else:
             self.textEdit.append('暂无本地抽卡记录\n')
         self.textEdit.append('\n')
+        self.textEdit.append('提示：如果在运行后更换卡池请点击-更新玛娜-刷新\n')
         self.textEdit.append('提示：若无法正常播放视频请安装依赖文件夹下的LAV_filters\n')
         self.textEdit.append('提示：若无法正常显示字体请到文件夹下安装字体\n')
         self.textEdit.append('提示：发生闪退、崩溃、卡顿请联系QQ2362003458\n')

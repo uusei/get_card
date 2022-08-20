@@ -7,21 +7,13 @@ import random as ra
 def read_num():
     picpath, save_video = init_file()
     if os.path.isfile('picnum1.npy'):
-        print('YES,get num')
-        pic = np.load('picnum1.npy')
-        print(pic)
-        count_pic = len(pic)
-        if count_pic > 0:
-            # 应该返回的重要数值有 图片数组 抽到的路径 图片的数组位置 当前图片数量
-            return pic, count_pic
-        else:
-            print('remove old now')
-            os.remove('picnum1.npy')
-            print('create num now')
-            count_pic, pic_files = list_pic(picpath)
-            pic = np.array(pic_files)
-            # 应该返回的重要数值有 图片数组 抽到的路径 当前图片数量
-            return pic, count_pic
+        print('remove old now')
+        os.remove('picnum1.npy')
+        print('create num now')
+        count_pic, pic_files = list_pic(picpath)
+        pic = np.array(pic_files)
+        # 应该返回的重要数值有 图片数组 抽到的路径 当前图片数量
+        return pic, count_pic
 
     elif not os.path.isfile('picnum1.npy'):
         print('create num now')

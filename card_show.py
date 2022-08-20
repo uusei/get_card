@@ -26,9 +26,6 @@ class card_show(QWidget, Ui_Form):
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.Tool | Qt.WindowStaysOnTopHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
 
-        # 设置不透明度
-        #self.opacity_effect = QGraphicsOpacityEffect()
-        #self.opacity_effect.setOpacity(0)
     # 根据电脑屏幕初始化大小
     def default_size1(self):
         global w1, h1
@@ -56,6 +53,7 @@ class card_show(QWidget, Ui_Form):
         self.video_init()
         # self.img1 = QtGui.QPixmap(self.picdir).scaled(self.target_card.width(), self.target_card.height())
         self.picdirect = picdir
+
     # 定义视频图片部分
     def card_video(self):
         global video_status
@@ -143,9 +141,10 @@ class Update2(QThread):
         while True:
             cap = cv2.VideoCapture(self.dir)
             while True:
-                ret, frame = cap.read()
+                ret = cap.grab()
                 if video_status == 1:
                     if ret:
+                        ret, frame = cap.retrieve()
                         rgbImage = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                         h, w, ch = rgbImage.shape
                         bytesPerLine = ch * w

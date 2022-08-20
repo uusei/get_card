@@ -246,9 +246,10 @@ class Update_v(QThread):
     def run(self):
         cap = cv2.VideoCapture('02.mp4')
         while True:
-            ret, frame = cap.read()
+            ret = cap.grab()
             if video_status == 1:
                 if ret:
+                    ret, frame = cap.retrieve()
                     rgbImage = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                     h, w, ch = rgbImage.shape
                     bytesPerLine = ch * w
