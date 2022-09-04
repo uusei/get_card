@@ -13,6 +13,7 @@ import card_show
 from showrecord import record_window
 from PyQt5.QtGui import QCursor
 import cv2
+import operator_tip_use
 
 
 class card_func(QMainWindow, Ui_getcard):
@@ -31,6 +32,7 @@ class card_func(QMainWindow, Ui_getcard):
         self.player.mediaStatusChanged.connect(self.alternativemusic)
         self.player1.mediaStatusChanged.connect(self.alternativemusic)
         self.pushButton_2.clicked.connect(self.gachicard)
+        self.pushButton_4.clicked.connect(self.tipit)
         self.pushButton_5.clicked.connect(self.update_card)
         self.Update_s.date2.connect(self.video_size)
         self.pushButton_3.clicked.connect(self.recordit)
@@ -39,6 +41,8 @@ class card_func(QMainWindow, Ui_getcard):
     def default_size(self):
         screen = QDesktopWidget().screenGeometry()
         size = self.geometry()
+        # 关于大小支持 目前仅支持到1920*1080为止 由于本人硬件有限 高分辨率暂时不做支持
+        # 为防止2K、4K高分辨率出现问题 请不要随意拖拽界面
         if (size.width() < screen.width()) & (size.height() < screen.height()) & \
                 (size.width() <= 1920) & (size.height() <= 1080):
             self.setGeometry(0, 0, screen.width(), screen.height())
@@ -208,6 +212,10 @@ class card_func(QMainWindow, Ui_getcard):
         self.record_Widget.show()
         self.record_Widget.print_record()
 
+    def tipit(self):
+        self.tip_widget = operator_tip_use.tip_window()
+        self.tip_widget.show()
+
 #   以下都是重写功能 主要实现两大功能
 
 #   拖拽功能
@@ -243,6 +251,8 @@ class Update(QThread):
             time.sleep(0.1)
             self.date1.emit()  # 发射信号
 
+
+# 线程1 实现音频的开关问题
 class Update1(QThread):
     date2 = pyqtSignal()
 
@@ -254,7 +264,7 @@ class Update1(QThread):
             time.sleep(0.1)
             self.date2.emit()  # 发射信号
 
-
+# 线程1 实现视频播放功能
 class Update_v(QThread):
     video2label = pyqtSignal(QtGui.QImage)
 
