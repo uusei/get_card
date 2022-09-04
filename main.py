@@ -14,6 +14,7 @@ from showrecord import record_window
 from PyQt5.QtGui import QCursor
 import cv2
 
+
 class card_func(QMainWindow, Ui_getcard):
 
     def __init__(self):
@@ -34,6 +35,7 @@ class card_func(QMainWindow, Ui_getcard):
         self.Update_s.date2.connect(self.video_size)
         self.pushButton_3.clicked.connect(self.recordit)
 
+    # 设置默认大小
     def default_size(self):
         screen = QDesktopWidget().screenGeometry()
         size = self.geometry()
@@ -44,6 +46,7 @@ class card_func(QMainWindow, Ui_getcard):
                 (size.width() > 1920) & (size.height() > 1080):
             self.setGeometry(0, 0, 1920, 1080)
 
+    # 初始化开始界面
     def videoinit(self):
         global video_status, w1, h1
         video_status = 1
@@ -53,6 +56,7 @@ class card_func(QMainWindow, Ui_getcard):
         self.Update_v.start()
         self.Update_v.video2label.connect(self.videoplay)
 
+    # 实时变换视频大小
     def video_size(self):
         self.screenfull_w = self.screenfull.geometry().width()
         self.screenfull_h = self.screenfull.geometry().height()
@@ -60,7 +64,7 @@ class card_func(QMainWindow, Ui_getcard):
         w1 = self.screenfull_w
         h1 = self.screenfull_h
 
-
+    # 配置界面
     def init_ui(self):
         self.setWindowFlags(Qt.FramelessWindowHint)
         # screen = QDesktopWidget().screenGeometry()
@@ -74,6 +78,7 @@ class card_func(QMainWindow, Ui_getcard):
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.update_card()
 
+    # 初始化BGM
     def musicinit(self):
         self.play1 = False
         self.firstplay = True
@@ -83,6 +88,7 @@ class card_func(QMainWindow, Ui_getcard):
         self.player.setMedia(content)
         self.player.setVolume(60)
 
+    # 初始化第二段BGM 用于衔接初始BGM 后续仍然重播此段BGM
     def musicinit_re(self):
         rewave = QUrl.fromLocalFile('Grand_01.wav')
         recontent = QMediaContent(rewave)
@@ -90,6 +96,7 @@ class card_func(QMainWindow, Ui_getcard):
         self.player1.setMedia(recontent)
         self.player1.setVolume(60)
 
+    # 读取并按照逻辑播放BGM，如上所示
     def musicplay(self):
         self.musicon = self.radioButton.isChecked()
         if self.firstplay:
@@ -112,15 +119,18 @@ class card_func(QMainWindow, Ui_getcard):
                 self.play1 = False
                 print('stop1')
 
+    # 当音频状态发生反转，记录的值也发生反转
     def alternativemusic(self):
         self.readtime += 1
         if self.play1 & (self.readtime > 3):
             self.play1 = not self.play1
             self.firstplay = False
 
+    # 将帧图片显示在label上
     def videoplay(self, image):
         self.screenfull.setPixmap(QtGui.QPixmap(image))
 
+    # messagebox 提示玛娜不足
     def lack_mana(self):
         self.reply = QMessageBox(QMessageBox.Information, "提示", "\t    -玛娜不足-\n请重置抽卡次数或者更换卡池文件内容")
         # 添加自定义按钮
@@ -154,6 +164,7 @@ class card_func(QMainWindow, Ui_getcard):
 
         print('玛娜不足，请重置抽卡次数或者更换卡池文件内容')
 
+    # 执行抽卡功能
     def gachicard(self):
         if self.label_2.text() == '0':
             self.lack_mana()
@@ -169,6 +180,7 @@ class card_func(QMainWindow, Ui_getcard):
             self.Dialogue.show()
             self.Dialogue.show_card(self.picdir)
 
+    # 保存目前的玛娜数值到本地npy
     def save_num(self):
         self.pic = np.delete(self.pic, self.initpic)
         self.count_pic -= 1
@@ -182,6 +194,7 @@ class card_func(QMainWindow, Ui_getcard):
         self.Update_v.start()
         # self.player2.play()
 
+    # 更新玛娜按钮
     def update_card(self):
         self.Dialogue = card_show.card_show()
         # 得到图片数组 得到数组长度
@@ -189,11 +202,15 @@ class card_func(QMainWindow, Ui_getcard):
         self.label_2.setText(str(self.count_pic))
         self.Dialogue.closed.connect(self.save_num)
 
+    # 调试台以及抽卡记录
     def recordit(self):
         self.record_Widget = record_window()
         self.record_Widget.show()
         self.record_Widget.print_record()
 
+#   以下都是重写功能 主要实现两大功能
+
+#   拖拽功能
     def mousePressEvent(self, e):
         global video_status
         video_status = 2
@@ -214,6 +231,7 @@ class card_func(QMainWindow, Ui_getcard):
         self.__dragWin = False
         self.setCursor(QCursor(Qt.ArrowCursor))
 
+#  多线程 功能 播放02.mp4 修改请改为同名
 class Update(QThread):
     date1 = pyqtSignal()
 

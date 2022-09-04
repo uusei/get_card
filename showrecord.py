@@ -15,7 +15,6 @@ class record_window(QWidget):
         super().__init__()
         self.setupUi(self)
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.Tool)
-        # self.setAttribute(Qt.WA_TranslucentBackground)
         self.pushButton.clicked.connect(self.close)
 
     def setupUi(self, show_record):
@@ -39,7 +38,7 @@ class record_window(QWidget):
         self.label.setFont(font)
         self.label.setStyleSheet("QLabel{\n"
                                  "border: none;\n"
-                                 "    color: #ff9292;\n"
+                                 "color: #ff9292;\n"
                                  "}")
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")

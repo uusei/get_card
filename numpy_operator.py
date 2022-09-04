@@ -2,10 +2,13 @@
 import os
 import numpy as np
 import random as ra
+# 存放一些与本地相关的操作函数
+
 
 # 初始化读取本地文件
 def read_num():
     picpath, save_video = init_file()
+
     if os.path.isfile('picnum1.npy'):
         print('remove old now')
         os.remove('picnum1.npy')
@@ -22,6 +25,7 @@ def read_num():
         # 应该返回的重要数值有 图片数组 抽到的路径 当前图片数量
         return pic, count_pic
 
+
 # 获得抽到的卡
 def gachi_card_out(pic, count_pic):
     picpath, save_video = init_file()
@@ -30,6 +34,7 @@ def gachi_card_out(pic, count_pic):
     except:
         initpic = 0
     picname = pic[initpic]
+
     if os.path.isfile('receive_card.npy'):
         print('YES,get the record')
         receive = np.load('receive_card.npy')
@@ -37,6 +42,7 @@ def gachi_card_out(pic, count_pic):
         receive = np.append(receive, str1)
         print(receive)
         np.save('receive_card.npy', receive)
+
     else:
         print('creative a record')
         strs = []
@@ -44,10 +50,12 @@ def gachi_card_out(pic, count_pic):
         strs.append(str1)
         receive = np.array(str1)
         np.save('receive_card.npy', receive)
+
     print(picname)
     picdir = picpath + '\\' + picname
     print(picdir)
     return picdir, initpic
+
 
 # 抽卡背景视频播放
 def gachi_v_out(pic, count_pic, picpath):
@@ -61,6 +69,7 @@ def gachi_v_out(pic, count_pic, picpath):
     print(picdir)
     return picdir
 
+
 # 初始化文件路径
 def init_file():
     picpath = os.getcwd() + '\\' + 'pic'
@@ -70,6 +79,7 @@ def init_file():
     if not os.path.isdir(save_video):
         os.mkdir("video")
     return picpath, save_video
+
 
 # 获取本地文件图片
 def list_pic(picpath):
@@ -97,6 +107,7 @@ def list_pic(picpath):
     print(picpath, end='\n')
     return count_pic, pic_files
 
+
 # 获取文件后缀
 def get_file_ext(file_name):
     dot_pos = file_name.rfind('.')
@@ -106,6 +117,7 @@ def get_file_ext(file_name):
         ext = file_name[dot_pos:]
 
     return ext
+
 
 # 获取本地文件视频
 def list_video(picpath):

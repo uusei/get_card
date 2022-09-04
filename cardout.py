@@ -20,9 +20,9 @@ class Ui_Form(object):
         Form.setStyleSheet("border-radius: 8px;\n"
 "")
         self.target_card = QtWidgets.QLabel(Form)
-        self.target_card.setGeometry(QtCore.QRect(290, 80, 200, 300))
+        self.target_card.setGeometry(QtCore.QRect(290, 80, 300, 400))
         self.target_card.setMinimumSize(QtCore.QSize(200, 300))
-        self.target_card.setMaximumSize(QtCore.QSize(200, 300))
+        self.target_card.setMaximumSize(QtCore.QSize(300, 400))
         self.target_card.setStyleSheet("border-radius: 8px;\n"
 "border-image: none;\n"
 "background-color: transparent;")
