@@ -7,7 +7,7 @@ from cardout import Ui_Form
 from PyQt5.QtMultimedia import *
 import numpy_operator as npor
 import cv2
-
+import time
 
 # 该文件的主要功能是执行显示抽卡结果的功能
 # 如果有无效文件，则需要弹出窗口以及退出，防止堵塞进程
@@ -189,6 +189,7 @@ class Update2(QThread):
                 ret = cap.grab()
                 if video_status == 1:
                     if ret:
+                        t0 = time.time()
                         ret, frame = cap.retrieve()
                         rgbImage = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                         h, w, ch = rgbImage.shape
@@ -196,8 +197,10 @@ class Update2(QThread):
                         convertToQtFormat = QtGui.QImage(rgbImage.data, w, h, bytesPerLine, QtGui.QImage.Format_RGB888)
                         if w1 & h1:
                             convertToQtFormat = convertToQtFormat.scaled(w1, h1)
-                        cv2.waitKey(5)
+                        # cv2.waitKey(5)
                         self.date2.emit(convertToQtFormat)
+                        t1 = time.time()
+                        print("runing time is %s ms\n" % (str((t1 - t0) * 1000)))
                     else:
                         self.fin2.emit()
                         return

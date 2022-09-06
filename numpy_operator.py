@@ -3,7 +3,7 @@ import os
 import numpy as np
 import random as ra
 # 存放一些与本地相关的操作函数
-
+from datetime import datetime
 
 # 初始化读取本地文件
 def read_num():
@@ -38,17 +38,21 @@ def gachi_card_out(pic, count_pic):
     if os.path.isfile('receive_card.npy'):
         print('YES,get the record')
         receive = np.load('receive_card.npy')
+        str0 = '创建时间：(UTC+8)' + str(datetime.now()) + '\n'
         str1 = '本次抽到的图片为:' + picname + '\n' + '当前玛娜值' + str(count_pic) + '\n'
+        receive = np.append(receive, str0)
         receive = np.append(receive, str1)
-        print(receive)
+        # print(receive)
         np.save('receive_card.npy', receive)
 
     else:
         print('creative a record')
         strs = []
+        str0 = '创建时间：(UTC+8)' + str(datetime.now()) + '\n'
         str1 = '本次抽到的图片为:' + picname + '\n' + '当前玛娜值' + str(count_pic) + '\n'
-        strs.append(str1)
-        receive = np.array(str1)
+        strs.append(str0)
+        receive = np.array(strs)
+        receive = np.append(receive, str1)
         np.save('receive_card.npy', receive)
 
     print(picname)
@@ -136,4 +140,5 @@ def list_video(picpath):
     print("%s found" % count_pic)
     print(picpath, end='\n')
     return count_pic, pic_files
+
 

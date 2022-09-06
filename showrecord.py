@@ -90,8 +90,11 @@ class record_window(QWidget):
             self.textEdit.append('您的抽卡记录如下（按时间由近到远）：\n')
             receive = np.load('receive_card.npy')
             record_num = len(receive)
-            for i in range(record_num):
-                self.textEdit.append(str(receive[i]))
+            if record_num > 1:
+                for i in range(record_num):
+                    self.textEdit.append(str(receive[i]))
+            else:
+                self.textEdit.append(str(receive[1]))
         else:
             self.textEdit.append('暂无本地抽卡记录\n')
         self.textEdit.append('\n')
