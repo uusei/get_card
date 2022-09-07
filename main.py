@@ -80,7 +80,7 @@ class card_func(QMainWindow, Ui_getcard):
         self.musicinit_re()
         self.readtime = 0
         self.setAttribute(Qt.WA_TranslucentBackground)
-        self.update_card()
+        self.init_card()
 
     # 初始化BGM
     def musicinit(self):
@@ -200,6 +200,14 @@ class card_func(QMainWindow, Ui_getcard):
 
     # 更新玛娜按钮
     def update_card(self):
+        self.Dialogue = card_show.card_show()
+        # 得到图片数组 得到数组长度
+        self.pic, self.count_pic = npor.renew_num()
+        self.label_2.setText(str(self.count_pic))
+        self.Dialogue.closed.connect(self.save_num)
+
+    # 更新玛娜按钮
+    def init_card(self):
         self.Dialogue = card_show.card_show()
         # 得到图片数组 得到数组长度
         self.pic, self.count_pic = npor.read_num()
