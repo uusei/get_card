@@ -29,7 +29,7 @@ class card_show(QWidget, Ui_Form):
     def init_ui(self):
         self.setupUi(self)
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.Tool | Qt.WindowStaysOnTopHint)
-        self.setAttribute(Qt.WA_TranslucentBackground)
+        # self.setAttribute(Qt.WA_TranslucentBackground)
 
     # 根据电脑屏幕初始化大小
     def default_size1(self):
@@ -186,6 +186,9 @@ class Update2(QThread):
         while True:
             cap = cv2.VideoCapture(self.dir)
             while True:
+                screen1 = QDesktopWidget().screenGeometry()
+                w1 = screen1.width() - 1
+                h1 = screen1.height() - 1
                 ret = cap.grab()
                 if video_status == 1:
                     if ret:
